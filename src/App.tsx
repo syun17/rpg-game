@@ -14,7 +14,7 @@ type Character = {
 
 function App() {
 
-  const [text,setText] = useState<string>('名前');
+  const [text,setText] = useState<string>('');
   const [hp,setHp] = useState<number>(30);
   const [atk,setAtk] = useState<number>(10);
   const [damage,setDamage] = useState<number>(0);
@@ -113,6 +113,9 @@ function App() {
   };
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+    if (text === '' || hp === 0 || atk === 0) {
+      return;
+    }
     characterSet(text, hp, atk);
   };
 
@@ -129,6 +132,7 @@ function App() {
       <input
         type="text"
         value={text}
+        placeholder='名前'
         onChange={(event) => setText(event.target.value)}
       />
       <input type="number"
@@ -139,7 +143,7 @@ function App() {
         value={atk}
         onChange={(event) => setAtk(Number(event.target.value))}/>
 
-      <input type="submit" value="キャラクターを追加" onSubmit={()=>characterSet(text,hp,atk)} />
+      <input type="submit" value="キャラクターを追加" />
 
     </form>
       <h1>バトルロイヤル</h1>
